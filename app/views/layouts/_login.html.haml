@@ -1,0 +1,11 @@
+%form#login-form.form-horizontal{name: "loginForm", "ng-submit" => "submitLogin()"}
+  %fieldset
+    .form-group{"ng-class" => "{'has-error':loginForm.inputUsername.$error.required}"}
+      .col-lg-10.col-lg-offset-1
+        %input#inputUsername.form-control.input-sm{autofocus: "", name: "inputUsername", "ng-model" => "currentUser.username", required: "", type: "text", placeholder: :username}
+    .form-group{"ng-class" => "{'has-error':loginForm.inputPassword.$error.required}"}
+      .col-lg-10.col-lg-offset-1
+        %input#inputPassword.form-control.input-sm{name: "inputPassword", "ng-model" => "currentUser.password", required: "", type: "password", placeholder: :password}
+    .form-group
+      .col-sm-offset-1
+        %button.btn.btn-success.btn-xs{"ng-disabled" => "loginForm.$invalid", type: "submit"} Login

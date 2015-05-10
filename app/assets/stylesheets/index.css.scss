@@ -1,0 +1,254 @@
+@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+
+// constants
+$TRANSITION_DURATION: .4s;
+$TRANSITION_EASE_LINEAR: linear;
+$TRANSITION_EASE_OUT_SINE: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+
+// Main Container
+.main-container {
+  padding-top: 60px;
+}
+
+//navbar
+.navbar-brand{
+  font-family: 'Lobster',cursive;
+}
+
+.main-view-container,
+.main-view-posts,
+.main-view-show-post,
+.main-view-show-user,
+.main-view-create-user,
+.main-view-create-post,{
+  &.ng-enter{
+    opacity:0;
+    @include transition(opacity $TRANSITION_DURATION $TRANSITION_EASE_LINEAR 0.15s);
+  }
+  &.ng-enter-active{
+    opacity:1;
+  }
+}
+
+// Search Form
+#search-form{
+  #search-input{
+    color: white;
+    width: 175px;
+  }
+  #limit-input{
+    width: 50px;
+  }
+  .form-control-wrapper .form-control{
+    ~ .floating-label{
+      color: white;
+      white-space: nowrap;
+    }
+    &:not(.empty) ~ .floating-label, &:focus ~ .floating-label{
+      color: white;
+      top: -15px;
+    }
+  }
+  input{
+    max-height: 34px;
+  }
+  .search-value-group{
+    .search-value-input{
+      max-width: 90px;
+      option{
+        color: black;
+      }
+    }
+    .form-control:not(.empty) ~ .floating-label, .form-control:focus ~ .floating-label{
+      left: -35px;
+    }
+  }
+  .select2-container{
+    height: inherit;
+    min-width: 175px;
+    max-width: 300px;
+  }
+  a{
+    color: $brand-info;
+    text-decoration: none;
+  }
+  .select2-container-multi .select2-choices .select2-search-choice{
+    background: $brand-info;
+    color: white;
+  }
+  .input-group-addon{
+    border: 0px;
+    cursor: pointer;
+    &.sort-button{ // sort button
+      background: $brand-info;
+      &:hover{
+        background: darken($brand-info, 10%);
+      }
+      a{
+        color: white;
+      }
+    }
+    &.remove-value-button{ // cancel checkbox buttons
+      color: white;
+      background: $brand-primary;
+      &:hover{
+        background: darken($brand-primary, 10%);
+      }
+    }
+    &.ok-value-button{ // ok checkbox buttons
+      color: white;
+      background: $brand-success;
+      &:hover{
+        background: darken($brand-success, 10%);
+      }
+      &.disabled{
+        color: white;
+        cursor: default;
+        background: lighten($brand-success, 20%);
+      }
+    }
+  }
+}
+
+// bootstrap-datepicker
+.datepicker.datepicker-dropdown.dropdown-menu{
+  color: black;
+}
+
+
+// Flash Messages
+#flash-messages{
+  top: 30px;
+  right: 30px;
+  left: 30px;
+  position: fixed;
+  z-index: 1061; // greater than .popover class
+  width: inherit;
+
+  .alert{
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .ng-move,
+  .ng-enter,
+  .ng-leave {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+  }
+   
+  .ng-leave.ng-leave-active,
+  .ng-move,
+  .ng-enter {
+    opacity:0;
+  }
+   
+  .ng-leave,
+  .ng-move.ng-move-active,
+  .ng-enter.ng-enter-active {
+    opacity:1;
+  }
+}
+
+
+// Posts Table
+#posts-view{
+  #filter-by-label{
+    font-size: 100%;
+  }
+  table.posts-table{
+    table-layout: fixed;
+    width: 100%;
+    tr{
+      &:hover {
+        cursor: pointer;
+      }
+      &.selected {
+        cursor: default;
+      }
+    }
+    td{
+      border-top: 2px solid darkgray;
+      position: relative;
+      &.ordered-attribute {
+        width: 15%;
+        border-right: 1px solid lightgray;
+        p{
+          text-align: center;
+        }
+      }
+      &.ordered-attribute .value{
+        font-weight: bold;
+        font-size: 150%;
+      }
+      &.post-info{
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        p.title{
+          font-weight: bold;
+          margin: 0;
+          padding: 5px;
+          border-bottom: 1px solid lightgray;
+        }
+        td{
+          width: 90px;
+          padding: 5px;
+          text-align: center;
+          border: 0;
+          border-left: 1px solid lightgray;
+        }
+        td:first-child{
+          border: 0;
+        }
+        ul.league-attributes{
+          padding: 0;
+          list-style-type: none;
+          li{
+            display: inline;
+          }
+        }
+      }
+      .show-link{
+        position: absolute;
+        right: 2%;
+        top: 15%;
+      }
+    }
+  }
+}
+
+// Login Form
+#login-form .form-group{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+
+// Forms
+legend {
+  button {
+    font-family: $font-family-base;
+  }
+ .label {
+    font-family: $font-family-base;
+    font-weight: normal;
+    font-size: 55%;
+    vertical-align: middle;
+  }
+}
+
+
+// Footer
+footer {
+  li {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  p {
+    clear: left;
+    margin-bottom: 0;
+    }
+}

@@ -1,0 +1,86 @@
+module Yahoo
+  class BaseballScraper < Yahoo::Scraper
+
+    URL = 'baseball.fantasysports.yahoo.com'
+    LAST_WEEK_START_DATE = '????????????????????????????????????????'
+
+
+    private
+    def map_league_attributes!
+        # make sure to capture all scoring categories from http://baseball.fantasysports.yahoo.com/b1/reg/createleague
+      @league_attributes_map ||= {
+        name:                              basic_settings_value('League Name'),
+        teams:                             basic_settings_value('Number of Teams').to_i,
+        draft_date:                        iso8601_if_present(draft_settings_value('Draft Date')),
+        draft_type:                        draft_settings_value('Draft Type'),
+        fractional_points:                 boolean_if_present(settings_value('Fractional Points:')),
+        negative_points:                   boolean_if_present(settings_value('Negative Points:')),
+        draft_order:                       draft_settings_value('Draft Order'),
+        trade_deadline:                    iso8601_if_present(trade_deadline_with_year),
+        seconds_per_draft_pick:            integer_if_present(draft_settings_value('Seconds Per Pick')),
+        playoff_teams:                     playoff_info[:teams].to_i,
+        playoff_weeks:                     scrape_playoff_weeks,
+        playoff_start_date:                scrape_playoff_start_date.iso8601,
+        waiver_rules:                      scrape_waiver_rules('Waiver Time:', 'Waiver Type:', 'Waiver Mode:'),
+        teams_filled:                      integer_if_present(''),
+        entry_fee:                         decimal_value_present?(''),
+        starting_catchers:                 position_count(''),
+        starting_first_basemen:            position_count(''),
+        starting_second_basemen:           position_count(''),
+        starting_third_basemen:            position_count(''),
+        starting_shortstops:               position_count(''),
+        starting_left_fielders:            position_count(''),
+        starting_center_fielders:          position_count(''),
+        starting_right_fielders:           position_count(''),
+        starting_outfielders:              position_count(''),
+        starting_utility_players:          position_count(''),
+        starting_designated_hitters:       position_count(''),
+        starting_pitchers:                 position_count(''),
+        starting_starting_pitchers:        position_count(''),
+        starting_relief_pitchers:          position_count(''),
+        bench_positions:                   position_count(''),
+        disabled_list_positions:           position_count(''),
+        score_hits:                        value_present?(''),
+        score_extra_base_hits:             value_present?(''),
+        score_batting_averages:            value_present?(''),
+        score_slugging_percentage:         value_present?(''),
+        score_on_base_percentage:          value_present?(''),
+        score_total_bases:                 value_present?(''),
+        score_runs_created:                value_present?(''),
+        score_singles:                     value_present?(''),
+        score_doubles:                     value_present?(''),
+        score_triples:                     value_present?(''),
+        score_homeruns:                    value_present?(''),
+        score_walks:                       value_present?(''),
+        score_runs_scored:                 value_present?(''),
+        score_runs_batted_in:              value_present?(''),
+        score_stolen_bases:                value_present?(''),
+        score_strikeouts:                  value_present?(''),
+        score_ground_into_double_plays:    value_present?(''),
+        score_cycles:                      value_present?(''),
+        score_errors:                      value_present?(''),
+        score_earned_run_averages:         value_present?(''),
+        score_whips:                       value_present?(''),
+        score_innings_pitched:             value_present?(''),
+        score_earned_runs:                 value_present?(''),
+        score_wins:                        value_present?(''),
+        score_losses:                      value_present?(''),
+        score_saves:                       value_present?(''),
+        score_blown_saves:                 value_present?(''),
+        score_thrown_strikeouts:           value_present?(''),
+        score_hits_allowed:                value_present?(''),
+        score_walks_issued:                value_present?(''),
+        score_shutouts:                    value_present?(''),
+        score_hit_batters:                 value_present?(''),
+        score_complete_games:              value_present?(''),
+        score_no_hitters:                  value_present?(''),
+        score_perfect_games:               value_present?(''),
+        score_on_base_percentages_against: value_present?(''),
+        score_batting_averages_against:    value_present?(''),
+        score_strikeout_to_walk_ratios:    value_present?(''),
+        score_strikeouts_per_9_innings:    value_present?(''),
+        score_quality_starts:              value_present?('')
+      }
+    end
+  end
+end

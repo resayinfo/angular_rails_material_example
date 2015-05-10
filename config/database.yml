@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+
+development:
+  <<: *default
+  database: fantasy_app_development
+
+test:
+  <<: *default
+  database: travis_ci_test
+  username: postgres

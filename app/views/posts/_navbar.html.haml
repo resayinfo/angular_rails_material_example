@@ -1,0 +1,32 @@
+%nav.navbar.navbar-material-primary
+  .container-fluid
+
+    .navbar-header
+
+      %button.navbar-toggle.collapsed{"data-target" => "#search-form", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{href: "#"} Search
+    #search-form.collapse.navbar-collapse
+      %form.navbar-form.navbar-left{role: :search}
+        .form-group.has-info
+          %input#search-input.form-control{"ng-model" => "qParam", 'ng-change'=>"updateQparam()", placeholder: 'Enter words or phrases...', type: :text}
+        .form-group
+          .input-group
+            %input#league-select.form-control.floating-label{'leagueselect2'=>'', 'league-options'=> LeagueLike::ALL_LEAGUE_CLASSES.map(&:to_s), placeholder: 'League Type', type: 'hidden'}
+        .form-group
+          %input#filter-select.form-control{'filterselect2'=>'', 'grouped-options'=> grouped_filter_options.to_json, 'option-comparators'=>ParamFilter::COMPARATORS.keys.map(&:to_s).map(&:titleize), placeholder: 'Filters', type: 'hidden'}
+        = render 'posts/filter_value_input', input_type: :string
+        = render 'posts/filter_value_input', input_type: :integer
+        = render 'posts/filter_value_input', input_type: :boolean
+        = render 'posts/filter_value_input', input_type: :decimal
+        = render 'posts/filter_value_input', input_type: :datetime
+        .form-group
+          .input-group
+            %input#order-select.form-control.floating-label{'orderselect2'=>'', 'grouped-options'=> grouped_order_options.to_json, placeholder: 'Order', type: 'hidden'}
+            .input-group-addon.sort-button{'ng-click'=>'toggleDirection()'}
+              %a {{sortDirection}}
+        .form-group.has-info
+          %input#limit-input.form-control.floating-label{min: 1, type: :number, "ng-model"=>"queryLimit", 'ng-change'=>"updateQueryLimit()", placeholder: 'Limit'}

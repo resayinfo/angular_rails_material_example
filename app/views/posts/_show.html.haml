@@ -1,0 +1,27 @@
+%form.form-horizontal.well{name: "postForm", "ng-submit" => "submit()"}
+  %hidden{value: "{{post.user_id}}", "ng-model" => "post.user_id"}
+  %fieldset
+    %legend
+      {{legendText}}
+      %span.label.label-danger{"ng-if" => "!!post.deleted_at"} Deleted
+      %button.btn.btn-primary.pull-right{"ng-click" => "deletePost(); $event.stopPropagation()", "ng-if" => "canDestroy", type: 'button'} Delete
+    .form-group{"ng-class" => "{'has-error':postForm.title.$error.required}"}
+      %label.col-lg-2.control-label{for: "title"} Title
+      .col-lg-10
+        %input.form-control{name: "title", "ng-model" => "post.title", required: "", type: "text", "ng-disabled" => "!canModify"}
+    .form-group{"ng-class" => "{'has-error':postForm.leagueType.$error.required}"}
+      %label.col-lg-2.control-label{for: "leagueType"} League Type
+      .col-lg-10
+        %select.form-control{name: "leagueType", required: "", "ng-model" => "post.league_type", "ng-options" => "ltype.name as ltype.shortName for ltype in leagueTypes", "ng-disabled" => "!canModify"}
+    .form-group
+      %label.col-lg-2.control-label{for: "settingsURL"} Settings URL
+      .col-lg-10
+        %input.form-control{name: "settingsURL", "ng-model" => "post.league.url", type: "text", "ng-disabled" => "!canModify"}
+    .form-group
+      %label.col-lg-2.control-label{for: "body"} Other Info
+      .col-lg-10
+        %textarea.form-control{name: "body", "ng-model" => "post.body", rows: "4", "ng-disabled" => "!canModify"}
+    .formFooter
+      %button.btn{"ng-click" => "browseToOverview()"} Back
+      %button.btn.btn-success{"ng-disabled" => "postForm.$invalid", "ng-if" => "canModify", type: "submit"} {{submitButtonText}}
+      %p.text-primary{"ng-show" => "postForm.$invalid"} Please complete required fields

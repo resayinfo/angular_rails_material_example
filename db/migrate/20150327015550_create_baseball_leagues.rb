@@ -1,0 +1,94 @@
+class CreateBaseballLeagues < ActiveRecord::Migration
+  def change
+    create_table :baseball_leagues do |t|
+      t.string :name
+      t.integer :teams
+      t.datetime :draft_date
+      t.string :draft_order
+      t.integer :seconds_per_draft_pick
+      t.boolean :fractional_points
+      t.boolean :negative_points
+      t.datetime :trade_deadline
+      t.integer :playoff_teams
+      t.integer :playoff_weeks
+      t.datetime :playoff_start_date
+      t.string :waiver_rules
+      t.string :url
+      t.string :draft_type
+      t.integer :teams_filled
+      t.decimal :entry_fee, precision: 10, scale: 2
+      t.integer :starting_catchers
+      t.integer :max_catchers
+      t.integer :starting_first_basemen
+      t.integer :max_first_basemen
+      t.integer :starting_second_basemen
+      t.integer :max_second_basemen
+      t.integer :starting_third_basemen
+      t.integer :max_third_basemen
+      t.integer :starting_shortstops
+      t.integer :max_shortstops
+      t.integer :starting_left_fielders
+      t.integer :max_left_fielders
+      t.integer :starting_center_fielders
+      t.integer :max_center_fielders
+      t.integer :starting_right_fielders
+      t.integer :max_right_fielders
+      t.integer :starting_outfielders
+      t.integer :max_outfielders
+      t.integer :starting_utility_players
+      t.integer :max_utility_players
+      t.integer :starting_designated_hitters
+      t.integer :max_designated_hitters
+      t.integer :starting_pitchers
+      t.integer :max_pitchers
+      t.integer :starting_starting_pitchers
+      t.integer :max_starting_pitchers
+      t.integer :starting_relief_pitchers
+      t.integer :max_relief_pitchers
+      t.integer :bench_positions
+      t.integer :disabled_list_positions
+      t.boolean :score_hits
+      t.boolean :score_extra_base_hits
+      t.boolean :score_batting_averages
+      t.boolean :score_slugging_percentage
+      t.boolean :score_on_base_percentage
+      t.boolean :score_total_bases
+      t.boolean :score_runs_created
+      t.boolean :score_singles
+      t.boolean :score_doubles
+      t.boolean :score_triples
+      t.boolean :score_homeruns
+      t.boolean :score_walks
+      t.boolean :score_runs_scored
+      t.boolean :score_runs_batted_in
+      t.boolean :score_stolen_bases
+      t.boolean :score_strikeouts
+      t.boolean :score_ground_into_double_plays
+      t.boolean :score_cycles
+      t.boolean :score_errors
+      t.boolean :score_earned_run_averages
+      t.boolean :score_whips
+      t.boolean :score_innings_pitched
+      t.boolean :score_earned_runs
+      t.boolean :score_wins
+      t.boolean :score_losses
+      t.boolean :score_saves
+      t.boolean :score_blown_saves
+      t.boolean :score_thrown_strikeouts
+      t.boolean :score_hits_allowed
+      t.boolean :score_walks_issued
+      t.boolean :score_shutouts
+      t.boolean :score_hit_batters
+      t.boolean :score_complete_games
+      t.boolean :score_no_hitters
+      t.boolean :score_perfect_games
+      t.boolean :score_on_base_percentages_against
+      t.boolean :score_batting_averages_against
+      t.boolean :score_strikeout_to_walk_ratios
+      t.boolean :score_strikeouts_per_9_innings
+      t.boolean :score_quality_starts
+
+      t.timestamps
+    end
+  end
+end

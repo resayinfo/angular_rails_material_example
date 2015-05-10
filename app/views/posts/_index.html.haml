@@ -1,0 +1,39 @@
+#posts-view.well
+  = render 'posts/navbar'
+  %br
+  %table.posts-table.table.table-hover.table-striped
+    %tbody
+      %tr.outer-row{'ng-class'=>"rowClassesForPost(post)", 'ng-click'=>'selectPost(post)', 'ng-repeat'=>'post in posts', 'post-id'=>'{{post.id}}'}
+        %td.ordered-attribute
+          %p.attr-name.text-muted
+            %small
+              {{postOrderAttributeDisplayName()}}
+          %p.value
+            {{postOrderAttributeDisplayValue(post)}}
+        %td.post-info
+          %p.title
+            {{post.title}}
+          %table
+            %tr
+              %td
+                %p.attr-name.text-muted
+                  %small
+                    Teams filled
+                %p.value
+                  {{leagueTeamsAvailable(post.league)}}
+              %td
+                %p.attr-name.text-muted
+                  %small
+                    Entry fee
+                %p.value
+                  {{leagueEntryFee(post.league)}}
+              %td
+                %p.attr-name.text-muted
+                  %small
+                    Draft date
+                %p.value
+                  {{leagueDraftDate(post.league)}}
+          -if Rails.env.production?
+            %a.btn.btn-info.btn-fab.btn-raised.mdi-action-launch.show-link.pull-right{href: "{{post.league['url']}}", target: :_blank, "ng-if"=>"post.id == selectedPost.id"}
+          -else
+            %a.btn.btn-info.btn-fab.btn-raised.mdi-action-launch.show-link.pull-right{href: "javascript:void(0)", "ng-Click"=>"showPost()", "ng-if"=>"post.id == selectedPost.id"}

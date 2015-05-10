@@ -1,0 +1,47 @@
+%form.form-horizontal.well{name: "userForm", "ng-submit" => "submit()"}
+  %fieldset
+    %legend
+      {{legendText}}
+      %span.label.label-danger{"ng-if" => "!!user.deactivated_at"} Deactivated
+      %button.btn.btn-primary.pull-right{"ng-click" => "deactivateUser(); $event.stopPropagation()", "ng-if" => "canDeactivate", type: 'button'} Deactivate
+      %span.pull-right &nbsp;
+      %button.btn.btn-success.pull-right{"ng-click" => "activateUser(); $event.stopPropagation()", "ng-if" => "canActivate", type: 'button'} Activate
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        %label.radio-inline
+          %input#admin-radio{name: "admin", type: "radio", 'ng-value' => 'true', 'ng-model' => "user.admin", "ng-disabled" => "!currentUser.admin"}
+            admin
+        %label.radio-inline
+          %input#normal-radio{name: "admin", type: "radio", 'ng-value' => 'false', 'ng-model' => "user.admin", "ng-disabled" => "!currentUser.admin"}
+            normal
+    .form-group
+      %label.col-lg-2.control-label{for: "firstName"} First Name
+      .col-lg-10
+        %input.form-control{name: "firstName", "ng-model" => "user.first_name", type: "text", "ng-disabled" => "!canModify"}
+    .form-group
+      %label.col-lg-2.control-label{for: "middleName"} Middle Name
+      .col-lg-10
+        %input.form-control{name: "middleName", "ng-model" => "user.middle_name", type: "text", "ng-disabled" => "!canModify"}
+    .form-group
+      %label.col-lg-2.control-label{for: "lastName"} Last Name
+      .col-lg-10
+        %input.form-control{name: "lastName", "ng-model" => "user.last_name", type: "text", "ng-disabled" => "!canModify"}
+    .form-group{"ng-class" => "{'has-error':userForm.username.$error.required}"}
+      %label.col-lg-2.control-label{for: "username"} Username
+      .col-lg-10
+        %input.form-control{name: "username", "ng-model" => "user.username", required: "", type: "text", "ng-disabled" => "!canModify"}
+    .form-group{"ng-class" => "{'has-error':userForm.email.$error.required}"}
+      %label.col-lg-2.control-label{for: "email"} Email
+      .col-lg-10
+        %input.form-control{name: "email", "ng-model" => "user.email", required: "", type: "text", "ng-disabled" => "!canModify"}
+    .form-group{"ng-if" => "canModify"}
+      %label.col-lg-2.control-label{for: "password"} New Password
+      .col-lg-10
+        %input.form-control{name: "password", "ng-model" => "user.password", type: "password"}
+    .form-group{"ng-if" => "canModify"}
+      %label.col-lg-2.control-label{for: "passwordConfirmation"} New Password Confirmation
+      .col-lg-10
+        %input.form-control{name: "passwordConfirmation", "ng-model" => "user.password_confirmation", type: "password"}
+    .formFooter
+      %button.btn.btn-success{"ng-disabled" => "userForm.$invalid", "ng-if" => "canModify", type: "submit"} {{submitButtonText}}
+      %p.text-primary{"ng-show" => "userForm.$invalid"} Please complete required fields

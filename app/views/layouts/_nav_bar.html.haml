@@ -1,0 +1,33 @@
+.navbar.navbar-fixed-top.navbar-material-red-900
+  .container
+    .navbar-header
+      = link_to APP_NAME, root_path, class: 'navbar-brand'
+      %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", type: "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    #navbar-main.navbar-collapse.collapse
+      -unless Rails.env.production?
+        %ul#user-menu.nav.navbar-nav.navbar-right{"ng-switch" => "sessionService.authorized()"}
+          %li
+            %a.navbar-right{href: "javascript:void(0)", 'ng-click'=>'createPost()', "ng-show" => 'canCreatePost'} New Post
+          %li.dropdown{"ng-switch-when" => "true"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0)"}
+              Hello, {{sessionService.getCurrentUser().username}}
+              %span.caret
+            %ul.dropdown-menu{"aria-labelledby" => "user-menu"}
+              %li
+                %a{href: "javascript:void(0)", "ng-click" => "navToAccount()"} Account
+              %li.divider
+              %li
+                %a{href: "javascript:void(0)", "ng-click" => "logout()"} Logout
+          %li.dropdown.navbar-right{"ng-switch-when" => "false"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0)"}
+              Login/Register
+              %span.caret
+            %ul.dropdown-menu{"aria-labelledby" => "user-menu"}
+              %li
+                = render 'layouts/login'
+              %li.divider
+              %li
+                %a{href: "javascript:void(0)", "ng-click" => "navToAccount()"} New Account

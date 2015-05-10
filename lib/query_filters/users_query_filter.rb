@@ -1,0 +1,2 @@
+class UsersQueryFilter < QueryFilter
+end

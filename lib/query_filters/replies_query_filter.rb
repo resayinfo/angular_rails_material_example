@@ -1,0 +1,2 @@
+class RepliesQueryFilter < QueryFilter
+end

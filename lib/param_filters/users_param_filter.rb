@@ -1,0 +1,2 @@
+class UsersParamFilter < ParamFilter
+end

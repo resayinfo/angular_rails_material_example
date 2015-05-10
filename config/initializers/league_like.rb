@@ -1,0 +1,1 @@
+LeagueLike::ALL_LEAGUE_CLASSES.each{|l| l.include LeagueLike}

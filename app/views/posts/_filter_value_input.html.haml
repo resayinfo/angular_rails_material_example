@@ -1,0 +1,7 @@
+.form-group.has-info.search-value-group{id: "filter-value-#{input_type}-input", style: "display: none;"}
+  .input-group
+    .input-group-addon.remove-value-button
+      %span.glyphicon.glyphicon-remove{'ng-click'=>'rejectSlidePromise()', 'aria-hidden'=> true}
+    = input_for_type input_type
+    .input-group-addon.ok-value-button{'ng-class'=>"isAcceptableValue(#{input_type}Value) ? '' : 'disabled'"}
+      %span.glyphicon.glyphicon-ok{'ng-click'=>'resolveSlidePromise()', 'aria-hidden'=> true}

@@ -1,0 +1,13 @@
+// THIS SHOULD INCLUDE 
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "roboto";
+@import "material"; // using 'material-fullpalette' takes foreever to render in tests.
+@import "ripples";
+@import "select2";
+@import "select2-bootstrap";
+@import "bootstrap-datepicker";
+
+// application styles you have to go last
+@import "index";

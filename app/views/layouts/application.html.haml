@@ -1,0 +1,42 @@
+!!!
+%html{lang: "en", "ng-app" => "fantasyLeagueFinder"}
+  %head
+    %base{href: "/"}
+    %title= APP_NAME
+    - if Rails.env.test?
+      = stylesheet_link_tag 'test'
+    - else
+      = stylesheet_link_tag 'application'
+    = csrf_meta_tags
+    %meta{name: :viewport, content: 'width=device-width, initial-scale=1'}
+  %body{data: app_data_for_angular}
+    .outter-container{"ng-controller" => "MainController"}
+      = render 'layouts/flash_messages'
+      = render 'layouts/nav_bar'
+      .main-container.container
+        .row
+          .col-lg-12.main-view-container{"ng-class" => "currentMainViewClass()", "ng-view" => ""}
+            -# NG-VIEW CONTENTS HERE
+        %footer
+          .row
+            .col-lg-12
+              %ul.list-unstyled
+                %li.pull-right
+                  %a{href: "#top"} Back to top
+                %li
+                  %a{href: 'https://twitter.com/LyricHupp'} Twitter
+                %li
+                  %a{href: 'https://github.com/llhupp'} GitHub
+              %p
+                Made by
+                = succeed ". Contact me at " do
+                  = link_to 'Lyric Hupp', 'https://github.com/llhupp', rel: 'nofollow'
+                = succeed "." do
+                  = link_to 'llhupp@gmail.com', 'mailto:llhupp@gmail.com', rel: 'nofollow'
+    /
+      Le javascript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag 'application'
+    = preload_all_views_for_angular exclude: ['layouts/', 'posts/_navbar', 'posts/_filter_value_input']
+    = yield :javascripts
